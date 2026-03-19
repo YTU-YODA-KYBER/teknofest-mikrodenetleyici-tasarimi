@@ -1,0 +1,25 @@
+# Vivado ve Quartus'un ürettiği gereksiz log ve derleme dosyaları
+*.jou
+*.log
+*.pb
+*.wdb
+*.dir
+*.str
+*.dmp
+*.vcd
+*.bit
+*.bin
+
+# Simülasyon ve Sentez klasörleri (Sadece kodları tut, gerisini boşver)
+sim/
+synth/
+impl/
+.Xil/
+*.sim/
+*.cache/
+*.hw/
+*.ip_user_files/
+
+# İşletim sistemi kalıntıları
+.DS_Store
+Thumbs.db
