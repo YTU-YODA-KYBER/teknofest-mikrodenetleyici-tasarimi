@@ -407,7 +407,7 @@
         </spirit:parameter>
         <spirit:parameter>
           <spirit:name>FREQ_TOLERANCE_HZ</spirit:name>
-          <spirit:value spirit:id="BUSIFPARAM_VALUE.CLK_I.FREQ_TOLERANCE_HZ"/>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.CLK_I.FREQ_TOLERANCE_HZ">0</spirit:value>
         </spirit:parameter>
       </spirit:parameters>
     </spirit:busInterface>
@@ -1981,16 +1981,16 @@
       <xilinx:displayName>cv32e40p_obi_to_axi_wrapper_v1_1</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:vendorDisplayName>KYBER</xilinx:vendorDisplayName>
-      <xilinx:coreRevision>1</xilinx:coreRevision>
+      <xilinx:coreRevision>2</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>xilinx.com:user:cv32e40p_obi_to_axi_wrapper:1.0</xilinx:canUpgradeFrom>
         <xilinx:canUpgradeFrom>kyber:user:cv32e40p_and_obi_to_axi_wrapper:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2026-04-03T12:20:38Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2026-04-04T13:46:18Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2025.2</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="017a62db"/>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="3b895144"/>
       <xilinx:checksum xilinx:scope="addressSpaces" xilinx:value="3d7cd988"/>
       <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="7759de12"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="7b033541"/>
