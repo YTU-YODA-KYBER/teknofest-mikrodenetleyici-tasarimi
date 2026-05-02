@@ -1,3 +1,5 @@
+//OBI İLE İLGİLİ BÜTÜN PORTLARI KOLAYCA TANIMLAMAK İÇİN BİR STRUCT İÇİNDE STRUCT OTO-MEKANİZMASI
+
 // Copyright 2023 ETH Zurich and University of Bologna.
 // Solderpad Hardware License, Version 0.51, see LICENSE for details.
 // SPDX-License-Identifier: SHL-0.51

@@ -9,37 +9,32 @@ module GPIO_AXI4_Lite(
     input  logic [31:0] GPIO_IDR,
     output logic [31:0] GPIO_ODR,
 
-    // WRITE ADRESS kanalları
+    // AW Portları
     input  logic [31:0] awaddr,
     input  logic        awvalid,
     output logic        awready,
 
-    // WRITE DATA kanalları
+    // WD Portları
     input  logic [31:0] wdata,
     input  logic        wvalid,
     output logic        wready,
 
-    // WRITE RESPONSE kanalları
+    // B Portları
     output logic [ 1:0] bresp,
     output logic        bvalid,
     input  logic        bready,
 
-    // READ ADRESS kanalları
+    // AR Portları
     input  logic [31:0] araddr,
     input  logic        arvalid,
     output logic        arready,
 
-    // READ DATA kanalları
+    // R Portları
     input  logic        rready,
     output logic [31:0] rdata,
     output logic [ 1:0] rresp,
     output logic        rvalid
 );
-    
-    assign awready = 1;
-    assign wready  = 1;
-    assign arready = 1;
-
 
 
     always @(posedge clk_i or negedge rst_n) begin
@@ -50,11 +45,14 @@ module GPIO_AXI4_Lite(
         if(!rst_n)begin
             GPIO_ODR <= 0;
         
-            bresp <= 2'b00;
-            bvalid <= 1'b0;
-            rdata <= 32'h0000;
-            rresp <= 2'b00;
-            rvalid <= 1'b0;
+            bresp   <= 0;
+            bvalid  <= 0;
+            rdata   <= 0;
+            rresp   <= 0;
+            rvalid  <= 0;
+            awready <= 1;
+            wready  <= 1;
+            arready <= 1;
         end
         else begin
 
@@ -63,15 +61,18 @@ module GPIO_AXI4_Lite(
             // ---------------------------------------------------------
 
             if (awvalid && wvalid) begin
-                bvalid  <= 1'b1; 
+                awready <= 0;
+                wready  <= 0;
+                bvalid  <= 1; 
                 
                 if (awaddr[3:0] == 4'h4)begin
                     GPIO_ODR <= {16'h0000,wdata[15:0]};
                     end
             end 
- 
             else if (bvalid && bready) begin
-                bvalid  <= 1'b0;
+                awready <= 1;
+                wready  <= 1;
+                bvalid  <= 0;
             end
 
 
@@ -79,16 +80,17 @@ module GPIO_AXI4_Lite(
             //                  AXI OKUMA İŞLEMİ
             // ---------------------------------------------------------
             if (arvalid) begin
-                rvalid  <= 1'b1;
+                arready <= 0;
+                rvalid  <= 1;
                 
                 case (araddr[3:0])
                     4'h0:  rdata[31:0] <= GPIO_IDR;
                     4'h4:  rdata[31:0] <= GPIO_ODR; 
-                    default: rdata <= 32'd0;               
                 endcase  
             end 
             else if (rvalid && rready) begin
-                rvalid  <= 1'b0;
+                arready <= 1;
+                rvalid  <= 0;
             end
         end
     end  

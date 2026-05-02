@@ -2,8 +2,8 @@
 <spirit:component xmlns:xilinx="http://www.xilinx.com" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <spirit:vendor>kyber</spirit:vendor>
   <spirit:library>user</spirit:library>
-  <spirit:name>GPIO_AXI4_Lite</spirit:name>
-  <spirit:version>2.0</spirit:version>
+  <spirit:name>I2C_Master_AXI4_Lite</spirit:name>
+  <spirit:version>3.0</spirit:version>
   <spirit:busInterfaces>
     <spirit:busInterface>
       <spirit:name>interface_aximm</spirit:name>
@@ -217,14 +217,14 @@
         <spirit:displayName>Synthesis</spirit:displayName>
         <spirit:envIdentifier>:vivado.xilinx.com:synthesis</spirit:envIdentifier>
         <spirit:language>SystemVerilog</spirit:language>
-        <spirit:modelName>GPIO_AXI4_Lite</spirit:modelName>
+        <spirit:modelName>I2C_Master_AXI4_Lite</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_anylanguagesynthesis_view_fileset</spirit:localName>
         </spirit:fileSetRef>
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>3064b5f6</spirit:value>
+            <spirit:value>8e630740</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -233,14 +233,29 @@
         <spirit:displayName>Simulation</spirit:displayName>
         <spirit:envIdentifier>:vivado.xilinx.com:simulation</spirit:envIdentifier>
         <spirit:language>SystemVerilog</spirit:language>
-        <spirit:modelName>GPIO_AXI4_Lite</spirit:modelName>
+        <spirit:modelName>I2C_Master_AXI4_Lite</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_anylanguagebehavioralsimulation_view_fileset</spirit:localName>
         </spirit:fileSetRef>
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>3064b5f6</spirit:value>
+            <spirit:value>8e630740</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_testbench</spirit:name>
+        <spirit:displayName>Test Bench</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:simulation.testbench</spirit:envIdentifier>
+        <spirit:modelName>I2C_Master_testbench</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_testbench_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>9e063aaa</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -254,7 +269,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>f64a5dae</spirit:value>
+            <spirit:value>72bd5f20</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -287,13 +302,9 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>GPIO_IDR</spirit:name>
+        <spirit:name>I2C_SCL</spirit:name>
         <spirit:wire>
-          <spirit:direction>in</spirit:direction>
-          <spirit:vector>
-            <spirit:left spirit:format="long">31</spirit:left>
-            <spirit:right spirit:format="long">0</spirit:right>
-          </spirit:vector>
+          <spirit:direction>out</spirit:direction>
           <spirit:wireTypeDefs>
             <spirit:wireTypeDef>
               <spirit:typeName>logic</spirit:typeName>
@@ -304,16 +315,12 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>GPIO_ODR</spirit:name>
+        <spirit:name>I2C_SDA</spirit:name>
         <spirit:wire>
-          <spirit:direction>out</spirit:direction>
-          <spirit:vector>
-            <spirit:left spirit:format="long">31</spirit:left>
-            <spirit:right spirit:format="long">0</spirit:right>
-          </spirit:vector>
+          <spirit:direction>inout</spirit:direction>
           <spirit:wireTypeDefs>
             <spirit:wireTypeDef>
-              <spirit:typeName>logic</spirit:typeName>
+              <spirit:typeName>wire</spirit:typeName>
               <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
               <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
@@ -577,6 +584,23 @@
         </spirit:wire>
       </spirit:port>
     </spirit:ports>
+    <spirit:modelParameters>
+      <spirit:modelParameter xsi:type="spirit:nameValueTypeType" spirit:dataType="integer">
+        <spirit:name>CLK_FREQ_HZ</spirit:name>
+        <spirit:displayName>Clk Freq Hz</spirit:displayName>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.CLK_FREQ_HZ">48000000</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter spirit:dataType="integer">
+        <spirit:name>I2C_FREQ_HZ</spirit:name>
+        <spirit:displayName>I2c Freq Hz</spirit:displayName>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.I2C_FREQ_HZ">400000</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter spirit:dataType="integer">
+        <spirit:name>HALF_PERIOD</spirit:name>
+        <spirit:displayName>Half Period</spirit:displayName>
+        <spirit:value spirit:format="long" spirit:resolve="dependent" spirit:id="MODELPARAM_VALUE.HALF_PERIOD" spirit:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.CLK_FREQ_HZ&apos;)) / (2 * spirit:decode(id(&apos;MODELPARAM_VALUE.I2C_FREQ_HZ&apos;)))) - 1)">59</spirit:value>
+      </spirit:modelParameter>
+    </spirit:modelParameters>
   </spirit:model>
   <spirit:choices>
     <spirit:choice>
@@ -589,35 +613,60 @@
     <spirit:fileSet>
       <spirit:name>xilinx_anylanguagesynthesis_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>src/GPIO_AXI4_Lite.sv</spirit:name>
+        <spirit:name>src/I2C_Master_AXI4_Lite.sv</spirit:name>
         <spirit:fileType>systemVerilogSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_3064b5f6</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_8e630740</spirit:userFileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
       <spirit:name>xilinx_anylanguagebehavioralsimulation_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>src/GPIO_AXI4_Lite.sv</spirit:name>
+        <spirit:name>src/I2C_Master_AXI4_Lite.sv</spirit:name>
         <spirit:fileType>systemVerilogSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
+      <spirit:name>xilinx_testbench_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>src/I2C_Master_testbench.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+        <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_testbench</spirit:userFileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
       <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>xgui/GPIO_AXI4_Lite_v2_0.tcl</spirit:name>
+        <spirit:name>xgui/I2C_Master_AXI4_Lite_v3_0.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_f64a5dae</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_72bd5f20</spirit:userFileType>
         <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
   </spirit:fileSets>
-  <spirit:description>32 giriÅŸ 32 Ã§Ä±kÄ±ÅŸ portu bulunan GPIO modÃ¼lÃ¼</spirit:description>
+  <spirit:description>AXI4 Lite kullanan, fast restart Ã¶zelliÄŸine sahip I2C_Master modÃ¼lÃ¼</spirit:description>
   <spirit:parameters>
     <spirit:parameter>
+      <spirit:name>CLK_FREQ_HZ</spirit:name>
+      <spirit:displayName>Clk Freq Hz</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.CLK_FREQ_HZ">48000000</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>I2C_FREQ_HZ</spirit:name>
+      <spirit:displayName>I2c Freq Hz</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.I2C_FREQ_HZ">400000</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>HALF_PERIOD</spirit:name>
+      <spirit:displayName>Half Period</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.HALF_PERIOD">59</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
       <spirit:name>Component_Name</spirit:name>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">GPIO_AXI4_Lite_v1_0</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">I2C_Master_AXI4_Lite_v1_0</spirit:value>
     </spirit:parameter>
   </spirit:parameters>
   <spirit:vendorExtensions>
@@ -645,22 +694,23 @@
       <xilinx:taxonomies>
         <xilinx:taxonomy>/UserIP</xilinx:taxonomy>
       </xilinx:taxonomies>
-      <xilinx:displayName>GPIO_v2.0</xilinx:displayName>
+      <xilinx:displayName>I2C_Master_v3.0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:vendorDisplayName>KYBER</xilinx:vendorDisplayName>
-      <xilinx:coreRevision>1</xilinx:coreRevision>
+      <xilinx:coreRevision>3</xilinx:coreRevision>
       <xilinx:upgrades>
-        <xilinx:canUpgradeFrom>xilinx.com:user:GPIO_AXI4_Lite:1.0</xilinx:canUpgradeFrom>
+        <xilinx:canUpgradeFrom>xilinx.com:user:I2C_Master_AXI4_Lite:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2026-05-01T22:02:02Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2026-05-01T19:55:50Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2025.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="988d9040"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="d3e0e498"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="b6b42ec3"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="0bc3a707"/>
-      <xilinx:checksum xilinx:scope="parameters" xilinx:value="ead48d60"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="f5d0d71d"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="7dbba5c4"/>
+      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="2883b139"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="c8616c48"/>
       <xilinx:targetDRCs>
         <xilinx:targetDRC xilinx:tool="ipi">
           <xilinx:targetDRCOption xilinx:name="ignore_freq_hz" xilinx:value="true"/>

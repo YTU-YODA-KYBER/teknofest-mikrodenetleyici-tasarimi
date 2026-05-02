@@ -1,3 +1,5 @@
+//AXI4 İLE İLGİLİ BÜTÜN PORTLARI KOLAYCA TANIMLAMAK İÇİN BİR STRUCT İÇİNDE STRUCT OTO-MEKANİZMASI
+
 // Copyright (c) 2019 ETH Zurich, University of Bologna
 //
 // Copyright and related rights are licensed under the Solderpad Hardware

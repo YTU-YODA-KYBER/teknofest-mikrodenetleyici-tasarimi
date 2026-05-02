@@ -2,131 +2,9 @@
 <spirit:component xmlns:xilinx="http://www.xilinx.com" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <spirit:vendor>kyber</spirit:vendor>
   <spirit:library>user</spirit:library>
-  <spirit:name>cv32e40p_and_obi_to_axi_wrapper</spirit:name>
-  <spirit:version>1.1</spirit:version>
+  <spirit:name>cv32e40p_obi_to_axi_wrapper</spirit:name>
+  <spirit:version>2.0</spirit:version>
   <spirit:busInterfaces>
-    <spirit:busInterface>
-      <spirit:name>axi</spirit:name>
-      <spirit:busType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="aximm" spirit:version="1.0"/>
-      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="aximm_rtl" spirit:version="1.0"/>
-      <spirit:master>
-        <spirit:addressSpaceRef spirit:addressSpaceRef="axi"/>
-      </spirit:master>
-      <spirit:portMaps>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>ARID</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_arid</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>ARADDR</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_araddr</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>ARLEN</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_arlen</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>ARSIZE</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_arsize</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>ARBURST</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_arburst</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>ARPROT</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_arprot</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>ARVALID</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_arvalid</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>ARREADY</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_arready</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>RID</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_rid</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>RDATA</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_rdata</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>RRESP</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_rresp</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>RLAST</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_rlast</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>RVALID</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_rvalid</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-        <spirit:portMap>
-          <spirit:logicalPort>
-            <spirit:name>RREADY</spirit:name>
-          </spirit:logicalPort>
-          <spirit:physicalPort>
-            <spirit:name>axi_rready</spirit:name>
-          </spirit:physicalPort>
-        </spirit:portMap>
-      </spirit:portMaps>
-    </spirit:busInterface>
     <spirit:busInterface>
       <spirit:name>axi_data</spirit:name>
       <spirit:busType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="aximm" spirit:version="1.0"/>
@@ -386,6 +264,128 @@
       </spirit:portMaps>
     </spirit:busInterface>
     <spirit:busInterface>
+      <spirit:name>axi_instr</spirit:name>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="aximm" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="aximm_rtl" spirit:version="1.0"/>
+      <spirit:master>
+        <spirit:addressSpaceRef spirit:addressSpaceRef="axi_instr"/>
+      </spirit:master>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ARID</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_arid</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ARADDR</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_araddr</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ARLEN</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_arlen</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ARSIZE</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_arsize</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ARBURST</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_arburst</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ARPROT</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_arprot</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ARVALID</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_arvalid</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ARREADY</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_arready</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RID</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_rid</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RDATA</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_rdata</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RRESP</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_rresp</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RLAST</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_rlast</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RVALID</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_rvalid</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RREADY</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>axi_instr_rready</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+    </spirit:busInterface>
+    <spirit:busInterface>
       <spirit:name>clk_i</spirit:name>
       <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock" spirit:version="1.0"/>
       <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock_rtl" spirit:version="1.0"/>
@@ -402,12 +402,12 @@
       </spirit:portMaps>
       <spirit:parameters>
         <spirit:parameter>
-          <spirit:name>ASSOCIATED_BUSIF</spirit:name>
-          <spirit:value spirit:id="BUSIFPARAM_VALUE.CLK_I.ASSOCIATED_BUSIF">axi:axi_data</spirit:value>
-        </spirit:parameter>
-        <spirit:parameter>
           <spirit:name>FREQ_TOLERANCE_HZ</spirit:name>
           <spirit:value spirit:id="BUSIFPARAM_VALUE.CLK_I.FREQ_TOLERANCE_HZ">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ASSOCIATED_BUSIF</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.CLK_I.ASSOCIATED_BUSIF">axi_data:axi_instr</spirit:value>
         </spirit:parameter>
       </spirit:parameters>
     </spirit:busInterface>
@@ -433,21 +433,21 @@
         </spirit:parameter>
         <spirit:parameter>
           <spirit:name>ASSOCIATED_RESET</spirit:name>
-          <spirit:value spirit:id="BUSIFPARAM_VALUE.RST_NI.ASSOCIATED_RESET">rst_n</spirit:value>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.RST_NI.ASSOCIATED_RESET">rst_ni</spirit:value>
         </spirit:parameter>
       </spirit:parameters>
     </spirit:busInterface>
   </spirit:busInterfaces>
   <spirit:addressSpaces>
     <spirit:addressSpace>
-      <spirit:name>axi</spirit:name>
-      <spirit:displayName>axi</spirit:displayName>
+      <spirit:name>axi_data</spirit:name>
+      <spirit:displayName>axi_data</spirit:displayName>
       <spirit:range spirit:format="bitString" spirit:bitStringLength="33" spirit:minimum="4096" spirit:rangeType="long">0x100000000</spirit:range>
       <spirit:width spirit:format="long">32</spirit:width>
     </spirit:addressSpace>
     <spirit:addressSpace>
-      <spirit:name>axi_data</spirit:name>
-      <spirit:displayName>axi_data</spirit:displayName>
+      <spirit:name>axi_instr</spirit:name>
+      <spirit:displayName>axi_instr</spirit:displayName>
       <spirit:range spirit:format="bitString" spirit:bitStringLength="33" spirit:minimum="4096" spirit:rangeType="long">0x100000000</spirit:range>
       <spirit:width spirit:format="long">32</spirit:width>
     </spirit:addressSpace>
@@ -466,7 +466,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>9ef08b8c</spirit:value>
+            <spirit:value>5d1f091c</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -482,7 +482,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>c19a04d5</spirit:value>
+            <spirit:value>8ab998f6</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -529,7 +529,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_arid</spirit:name>
+        <spirit:name>axi_instr_arid</spirit:name>
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
           <spirit:vector>
@@ -546,7 +546,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_araddr</spirit:name>
+        <spirit:name>axi_instr_araddr</spirit:name>
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
           <spirit:vector>
@@ -563,7 +563,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_arlen</spirit:name>
+        <spirit:name>axi_instr_arlen</spirit:name>
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
           <spirit:vector>
@@ -580,7 +580,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_arsize</spirit:name>
+        <spirit:name>axi_instr_arsize</spirit:name>
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
           <spirit:vector>
@@ -597,7 +597,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_arburst</spirit:name>
+        <spirit:name>axi_instr_arburst</spirit:name>
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
           <spirit:vector>
@@ -614,7 +614,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_arprot</spirit:name>
+        <spirit:name>axi_instr_arprot</spirit:name>
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
           <spirit:vector>
@@ -631,7 +631,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_arvalid</spirit:name>
+        <spirit:name>axi_instr_arvalid</spirit:name>
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
           <spirit:wireTypeDefs>
@@ -644,7 +644,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_arready</spirit:name>
+        <spirit:name>axi_instr_arready</spirit:name>
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
           <spirit:wireTypeDefs>
@@ -660,7 +660,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_rid</spirit:name>
+        <spirit:name>axi_instr_rid</spirit:name>
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
           <spirit:vector>
@@ -680,7 +680,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_rdata</spirit:name>
+        <spirit:name>axi_instr_rdata</spirit:name>
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
           <spirit:vector>
@@ -700,7 +700,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_rresp</spirit:name>
+        <spirit:name>axi_instr_rresp</spirit:name>
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
           <spirit:vector>
@@ -720,7 +720,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_rlast</spirit:name>
+        <spirit:name>axi_instr_rlast</spirit:name>
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
           <spirit:wireTypeDefs>
@@ -736,7 +736,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_rvalid</spirit:name>
+        <spirit:name>axi_instr_rvalid</spirit:name>
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
           <spirit:wireTypeDefs>
@@ -752,7 +752,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>axi_rready</spirit:name>
+        <spirit:name>axi_instr_rready</spirit:name>
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
           <spirit:wireTypeDefs>
@@ -1609,7 +1609,7 @@
       <spirit:file>
         <spirit:name>src/cv32e40p_obi_to_axi_wrapper.sv</spirit:name>
         <spirit:fileType>systemVerilogSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_af5c7946</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_7377a321</spirit:userFileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
@@ -1914,14 +1914,14 @@
     <spirit:fileSet>
       <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>xgui/cv32e40p_and_obi_to_axi_wrapper_v1_1.tcl</spirit:name>
+        <spirit:name>xgui/cv32e40p_obi_to_axi_wrapper_v2_0.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
         <spirit:userFileType>CHECKSUM_dfc5abce</spirit:userFileType>
         <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
   </spirit:fileSets>
-  <spirit:description>cv32e40p Ã§ekirdeÄŸi ve obi to axi wrapper</spirit:description>
+  <spirit:description>CV32E40P Ã§ekirdeÄŸi ve AXI4 wrapper</spirit:description>
   <spirit:parameters>
     <spirit:parameter>
       <spirit:name>boot_addr</spirit:name>
@@ -1978,22 +1978,21 @@
       <xilinx:taxonomies>
         <xilinx:taxonomy>/UserIP</xilinx:taxonomy>
       </xilinx:taxonomies>
-      <xilinx:displayName>cv32e40p_obi_to_axi_wrapper_v1_1</xilinx:displayName>
+      <xilinx:displayName>cv32e40p_obi_to_axi_wrapper_v2_0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:vendorDisplayName>KYBER</xilinx:vendorDisplayName>
-      <xilinx:coreRevision>2</xilinx:coreRevision>
+      <xilinx:coreRevision>1</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>xilinx.com:user:cv32e40p_obi_to_axi_wrapper:1.0</xilinx:canUpgradeFrom>
-        <xilinx:canUpgradeFrom>kyber:user:cv32e40p_and_obi_to_axi_wrapper:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2026-04-04T13:46:18Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2026-05-01T22:13:16Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2025.2</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="3b895144"/>
-      <xilinx:checksum xilinx:scope="addressSpaces" xilinx:value="3d7cd988"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="7759de12"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="7b033541"/>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="7a6e6895"/>
+      <xilinx:checksum xilinx:scope="addressSpaces" xilinx:value="ccc80216"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="1799a050"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="5c0993f9"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="4d9daa9f"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="4d34f0e3"/>
       <xilinx:targetDRCs>

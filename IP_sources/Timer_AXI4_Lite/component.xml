@@ -2,8 +2,8 @@
 <spirit:component xmlns:xilinx="http://www.xilinx.com" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <spirit:vendor>kyber</spirit:vendor>
   <spirit:library>user</spirit:library>
-  <spirit:name>GPIO_AXI4_Lite</spirit:name>
-  <spirit:version>2.0</spirit:version>
+  <spirit:name>Timer_module</spirit:name>
+  <spirit:version>3.0</spirit:version>
   <spirit:busInterfaces>
     <spirit:busInterface>
       <spirit:name>interface_aximm</spirit:name>
@@ -170,7 +170,7 @@
       </spirit:parameters>
     </spirit:busInterface>
     <spirit:busInterface>
-      <spirit:name>clk_i</spirit:name>
+      <spirit:name>clk</spirit:name>
       <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock" spirit:version="1.0"/>
       <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock_rtl" spirit:version="1.0"/>
       <spirit:slave/>
@@ -186,12 +186,12 @@
       </spirit:portMaps>
       <spirit:parameters>
         <spirit:parameter>
-          <spirit:name>FREQ_TOLERANCE_HZ</spirit:name>
-          <spirit:value spirit:id="BUSIFPARAM_VALUE.CLK_I.FREQ_TOLERANCE_HZ">0</spirit:value>
+          <spirit:name>ASSOCIATED_BUSIF</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.CLK.ASSOCIATED_BUSIF">interface_aximm</spirit:value>
         </spirit:parameter>
         <spirit:parameter>
-          <spirit:name>ASSOCIATED_BUSIF</spirit:name>
-          <spirit:value spirit:id="BUSIFPARAM_VALUE.CLK_I.ASSOCIATED_BUSIF">interface_aximm</spirit:value>
+          <spirit:name>FREQ_TOLERANCE_HZ</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.CLK.FREQ_TOLERANCE_HZ">0</spirit:value>
         </spirit:parameter>
       </spirit:parameters>
     </spirit:busInterface>
@@ -217,14 +217,14 @@
         <spirit:displayName>Synthesis</spirit:displayName>
         <spirit:envIdentifier>:vivado.xilinx.com:synthesis</spirit:envIdentifier>
         <spirit:language>SystemVerilog</spirit:language>
-        <spirit:modelName>GPIO_AXI4_Lite</spirit:modelName>
+        <spirit:modelName>Timer_module</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_anylanguagesynthesis_view_fileset</spirit:localName>
         </spirit:fileSetRef>
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>3064b5f6</spirit:value>
+            <spirit:value>689b5a41</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -233,14 +233,29 @@
         <spirit:displayName>Simulation</spirit:displayName>
         <spirit:envIdentifier>:vivado.xilinx.com:simulation</spirit:envIdentifier>
         <spirit:language>SystemVerilog</spirit:language>
-        <spirit:modelName>GPIO_AXI4_Lite</spirit:modelName>
+        <spirit:modelName>Timer_module</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_anylanguagebehavioralsimulation_view_fileset</spirit:localName>
         </spirit:fileSetRef>
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>3064b5f6</spirit:value>
+            <spirit:value>689b5a41</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_testbench</spirit:name>
+        <spirit:displayName>Test Bench</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:simulation.testbench</spirit:envIdentifier>
+        <spirit:modelName>Timer_testbench</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_testbench_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>8f7720f0</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -277,40 +292,6 @@
         <spirit:name>rst_n</spirit:name>
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
-          <spirit:wireTypeDefs>
-            <spirit:wireTypeDef>
-              <spirit:typeName>logic</spirit:typeName>
-              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
-            </spirit:wireTypeDef>
-          </spirit:wireTypeDefs>
-        </spirit:wire>
-      </spirit:port>
-      <spirit:port>
-        <spirit:name>GPIO_IDR</spirit:name>
-        <spirit:wire>
-          <spirit:direction>in</spirit:direction>
-          <spirit:vector>
-            <spirit:left spirit:format="long">31</spirit:left>
-            <spirit:right spirit:format="long">0</spirit:right>
-          </spirit:vector>
-          <spirit:wireTypeDefs>
-            <spirit:wireTypeDef>
-              <spirit:typeName>logic</spirit:typeName>
-              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
-            </spirit:wireTypeDef>
-          </spirit:wireTypeDefs>
-        </spirit:wire>
-      </spirit:port>
-      <spirit:port>
-        <spirit:name>GPIO_ODR</spirit:name>
-        <spirit:wire>
-          <spirit:direction>out</spirit:direction>
-          <spirit:vector>
-            <spirit:left spirit:format="long">31</spirit:left>
-            <spirit:right spirit:format="long">0</spirit:right>
-          </spirit:vector>
           <spirit:wireTypeDefs>
             <spirit:wireTypeDef>
               <spirit:typeName>logic</spirit:typeName>
@@ -589,35 +570,46 @@
     <spirit:fileSet>
       <spirit:name>xilinx_anylanguagesynthesis_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>src/GPIO_AXI4_Lite.sv</spirit:name>
+        <spirit:name>src/Timer_AXI4_Lite.sv</spirit:name>
         <spirit:fileType>systemVerilogSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_3064b5f6</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_689b5a41</spirit:userFileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
       <spirit:name>xilinx_anylanguagebehavioralsimulation_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>src/GPIO_AXI4_Lite.sv</spirit:name>
+        <spirit:name>src/Timer_AXI4_Lite.sv</spirit:name>
         <spirit:fileType>systemVerilogSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
+      <spirit:name>xilinx_testbench_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>src/Timer_tb.sv</spirit:name>
+        <spirit:fileType>systemVerilogSource</spirit:fileType>
+        <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
+        <spirit:userFileType>USED_IN_implementation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
       <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>xgui/GPIO_AXI4_Lite_v2_0.tcl</spirit:name>
+        <spirit:name>xgui/Timer_module_v3_0.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
         <spirit:userFileType>CHECKSUM_f64a5dae</spirit:userFileType>
         <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
   </spirit:fileSets>
-  <spirit:description>32 giriÅŸ 32 Ã§Ä±kÄ±ÅŸ portu bulunan GPIO modÃ¼lÃ¼</spirit:description>
+  <spirit:description>AXI4-Lite kullanan 32 bitlik timer modÃ¼lÃ¼</spirit:description>
   <spirit:parameters>
     <spirit:parameter>
       <spirit:name>Component_Name</spirit:name>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">GPIO_AXI4_Lite_v1_0</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">Timer_module_v1_0</spirit:value>
     </spirit:parameter>
   </spirit:parameters>
   <spirit:vendorExtensions>
@@ -645,22 +637,22 @@
       <xilinx:taxonomies>
         <xilinx:taxonomy>/UserIP</xilinx:taxonomy>
       </xilinx:taxonomies>
-      <xilinx:displayName>GPIO_v2.0</xilinx:displayName>
+      <xilinx:displayName>Timer_module_v3.0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:vendorDisplayName>KYBER</xilinx:vendorDisplayName>
-      <xilinx:coreRevision>1</xilinx:coreRevision>
+      <xilinx:coreRevision>6</xilinx:coreRevision>
       <xilinx:upgrades>
-        <xilinx:canUpgradeFrom>xilinx.com:user:GPIO_AXI4_Lite:1.0</xilinx:canUpgradeFrom>
+        <xilinx:canUpgradeFrom>xilinx.com:user:Timer_module:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2026-05-01T22:02:02Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2026-05-01T19:56:02Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2025.2</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="988d9040"/>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="987e6c48"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="d3e0e498"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="b6b42ec3"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="0bc3a707"/>
-      <xilinx:checksum xilinx:scope="parameters" xilinx:value="ead48d60"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="ec3ff972"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="fd339e78"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="1f5640ac"/>
       <xilinx:targetDRCs>
         <xilinx:targetDRC xilinx:tool="ipi">
           <xilinx:targetDRCOption xilinx:name="ignore_freq_hz" xilinx:value="true"/>
