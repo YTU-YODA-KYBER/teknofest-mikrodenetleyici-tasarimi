@@ -1,0 +1,154 @@
+
+build/firmware.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+.section .vectors, "ax"
+.global _start
+
+_start:
+    /* Stack pointer = DMEM sonu (0x20000000 + 4K = 0x20001000) */
+    li    sp, 0x20001000
+   0:	20001137          	lui	sp,0x20001
+
+    /* --- BSS sifirla --- */
+    la    t0, _sbss
+   4:	20000297          	auipc	t0,0x20000
+   8:	ffc28293          	addi	t0,t0,-4 # 20000000 <_ebss>
+    la    t1, _ebss
+   c:	20000317          	auipc	t1,0x20000
+  10:	ff430313          	addi	t1,t1,-12 # 20000000 <_ebss>
+
+00000014 <_bss_loop>:
+_bss_loop:
+    bge   t0, t1, _bss_done
+  14:	0062d663          	bge	t0,t1,20 <_bss_done>
+    sw    zero, 0(t0)
+  18:	0002a023          	sw	zero,0(t0)
+    addi  t0, t0, 4
+  1c:	0291                	addi	t0,t0,4
+    j     _bss_loop
+  1e:	bfdd                	j	14 <_bss_loop>
+
+00000020 <_bss_done>:
+_bss_done:
+
+    /* main()'e gec */
+    call  main
+  20:	203d                	jal	4e <main>
+
+00000022 <_hang>:
+
+_hang:
+    j     _hang
+  22:	a001                	j	22 <_hang>
+
+00000024 <uart_send_string>:
+ *  hattini gozlemleyebilmek icin sabit gecikme kullanir.
+ *  ILK TEST icin bunu kullan.
+ * --------------------------------------------------------- */
+static void uart_send_byte_blind(uint8_t c)
+{
+    UART_TDR = c;
+  24:	40040737          	lui	a4,0x40040
+    UART_CFG = UART_CFG_TX_START;
+  28:	400406b7          	lui	a3,0x40040
+    UART_TDR = c;
+  2c:	0731                	addi	a4,a4,12 # 4004000c <_ebss+0x2004000c>
+    UART_CFG = UART_CFG_TX_START;
+  2e:	06c1                	addi	a3,a3,16 # 40040010 <_ebss+0x20040010>
+  30:	4605                	li	a2,1
+/* Asama 2'ye gecince yukariyi yorum yapip sunu ac:        */
+/* #define uart_send_byte  uart_send_byte_poll             */
+
+static void uart_send_string(const char *s)
+{
+    while (*s) {
+  32:	00054783          	lbu	a5,0(a0)
+  36:	e391                	bnez	a5,3a <uart_send_string+0x16>
+        uart_send_byte((uint8_t)*s++);
+    }
+}
+  38:	8082                	ret
+    UART_TDR = c;
+  3a:	c31c                	sw	a5,0(a4)
+  3c:	6785                	lui	a5,0x1
+        uart_send_byte((uint8_t)*s++);
+  3e:	0505                	addi	a0,a0,1
+    UART_CFG = UART_CFG_TX_START;
+  40:	c290                	sw	a2,0(a3)
+    delay_cycles(4000);          /* 1 byte iletimi rahatca biter */
+  42:	fa078793          	addi	a5,a5,-96 # fa0 <_etext+0xedc>
+    while (n--) { /* nop */ }
+  46:	85be                	mv	a1,a5
+  48:	17fd                	addi	a5,a5,-1
+  4a:	fdf5                	bnez	a1,46 <uart_send_string+0x22>
+  4c:	b7dd                	j	32 <uart_send_string+0xe>
+
+0000004e <main>:
+
+int main(void)
+{
+  4e:	1141                	addi	sp,sp,-16 # 20000ff0 <_ebss+0xff0>
+  50:	c606                	sw	ra,12(sp)
+  52:	c422                	sw	s0,8(sp)
+    UART_CPB = UART_CPB_VALUE;   /* 48e6 / 115200 ~= 416 */
+  54:	400407b7          	lui	a5,0x40040
+  58:	1a000713          	li	a4,416
+  5c:	c398                	sw	a4,0(a5)
+    UART_STP = 1;                /* 1 stop bit */
+  5e:	4405                	li	s0,1
+  60:	c3c0                	sw	s0,4(a5)
+    uart_init();
+
+    uart_send_string("CV32E40P SoC - TEKNOFEST 2026\r\n");
+  62:	09000513          	li	a0,144
+  66:	3f7d                	jal	24 <uart_send_string>
+    uart_send_string("UART calisiyor!\r\n");
+  68:	0b000513          	li	a0,176
+  6c:	3f65                	jal	24 <uart_send_string>
+    UART_TDR = c;
+  6e:	40040737          	lui	a4,0x40040
+    UART_CFG = UART_CFG_TX_START;
+  72:	400406b7          	lui	a3,0x40040
+    UART_TDR = c;
+  76:	0731                	addi	a4,a4,12 # 4004000c <_ebss+0x2004000c>
+  78:	04100613          	li	a2,65
+    UART_CFG = UART_CFG_TX_START;
+  7c:	06c1                	addi	a3,a3,16 # 40040010 <_ebss+0x20040010>
+    UART_TDR = c;
+  7e:	c310                	sw	a2,0(a4)
+    UART_CFG = UART_CFG_TX_START;
+  80:	6785                	lui	a5,0x1
+  82:	c280                	sw	s0,0(a3)
+    delay_cycles(4000);          /* 1 byte iletimi rahatca biter */
+  84:	fa078793          	addi	a5,a5,-96 # fa0 <_etext+0xedc>
+    while (n--) { /* nop */ }
+  88:	85be                	mv	a1,a5
+  8a:	17fd                	addi	a5,a5,-1
+  8c:	fdf5                	bnez	a1,88 <main+0x3a>
+  8e:	bfc5                	j	7e <main+0x30>
+  90:	32335643          	.insn	4, 0x32335643
+  94:	3445                	jal	fffffb34 <_ebss+0xdffffb34>
+  96:	5030                	lw	a2,96(s0)
+  98:	5320                	lw	s0,96(a4)
+  9a:	2d20436f          	jal	t1,436c <_etext+0x42a8>
+  9e:	5420                	lw	s0,104(s0)
+  a0:	4b45                	li	s6,17
+  a2:	4f4e                	lw	t5,208(sp)
+  a4:	4546                	lw	a0,80(sp)
+  a6:	32205453          	.insn	4, 0x32205453
+  aa:	3230                	.insn	2, 0x3230
+  ac:	0d36                	slli	s10,s10,0xd
+  ae:	000a                	c.slli	zero,0x2
+  b0:	4155                	li	sp,21
+  b2:	5452                	lw	s0,52(sp)
+  b4:	6320                	.insn	2, 0x6320
+  b6:	6c61                	lui	s8,0x18
+  b8:	7369                	lui	t1,0xffffa
+  ba:	7969                	lui	s2,0xffffa
+  bc:	0d21726f          	jal	tp,1718e <_etext+0x170ca>
+  c0:	000a                	c.slli	zero,0x2
+	...
